@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import Square from './BoardComponents/Square.js';
+import RowB from './BoardComponents/RowB.js';
 export default class Block extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +15,7 @@ export default class Block extends Component {
       row5: [0,0,0,0,0,0],
       row6: [0,0,0,0,0,0],
       row7: [0,0,0,0,0,0],
+      row8: [0,0,0,0,0,0],
       player: 1,
       winner: ""
     };
@@ -36,7 +38,6 @@ export default class Block extends Component {
     m[4]=this.state.row5;
     m[5]=this.state.row6;
     m[6]=this.state.row7;
-    console.log(m.length);
     for (var i = 0; i < m.length; i++) {
       let x = m[i];
       let p1=0;
@@ -99,299 +100,133 @@ export default class Block extends Component {
         }
       }
     }
-    console.log(m);
-  }
-  //----------------------------------------------------------------------------------------------------------------------
-  setMove1(){
-    let row = this.state.row1;
-    let player=this.state.player;
-    var i;
-    var find = false;
-    for (i = row.length; i>=0 && !find; i--) {
-      if(row[i]===0){
-        row[i]=player;
-        find=true;
-      }
-    }
-
-    this.setState({row1:row},()=>{this.setPlayer()});
-  }
-  setMove2(){
-    let row = this.state.row2;
-    let player=this.state.player;
-    var i;
-    var find = false;
-    for (i = row.length; i>=0 && !find; i--) {
-      if(row[i]===0){
-        row[i]=player;
-        find=true;
-      }
-    }
-
-    this.setState({row2:row},()=>{this.setPlayer()});
-  }
-  setMove3(){
-    let row = this.state.row3;
-    let player=this.state.player;
-    var i;
-    var find = false;
-    for (i = row.length; i>=0 && !find; i--) {
-      if(row[i]===0){
-        row[i]=player;
-        find=true;
-      }
-    }
-
-    this.setState({row3:row},()=>{this.setPlayer()});
-  }
-  setMove4(){
-    let row = this.state.row4;
-    let player=this.state.player;
-    var i;
-    var find = false;
-    for (i = row.length; i>=0 && !find; i--) {
-      if(row[i]===0){
-        row[i]=player;
-        find=true;
-      }
-    }
-
-    this.setState({row4:row},()=>{this.setPlayer()});
-  }
-  setMove5(){
-    let row = this.state.row5;
-    let player=this.state.player;
-    var i;
-    var find = false;
-    for (i = row.length; i>=0 && !find; i--) {
-      if(row[i]===0){
-        row[i]=player;
-        find=true;
-      }
-    }
-
-    this.setState({row5:row},()=>{this.setPlayer()});
-  }
-  setMove6(){
-    let row = this.state.row6;
-    let player=this.state.player;
-    var i;
-    var find = false;
-    for (i = row.length; i>=0 && !find; i--) {
-      if(row[i]===0){
-        row[i]=player;
-        find=true;
-      }
-    }
-
-    this.setState({row6:row},()=>{this.setPlayer()});
-  }
-  setMove7(){
-    let row = this.state.row7;
-    let player=this.state.player;
-    var i;
-    var find = false;
-    for (i = row.length; i>=0 && !find; i--) {
-      if(row[i]===0){
-        row[i]=player;
-        find=true;
-      }
-    }
-
-    this.setState({row7:row},()=>{this.setPlayer()});
   }
 //-------------------------------------------------------------------------------------------------------------
   setPlayer(){
     let player = this.state.player;
+    let nuevo;
+    console.log(player);
     if(player===1){
-      player=2;
+      nuevo=2;
     }
     else{
-      player=1;
+      nuevo=1;
     }
     console.log("CAMBIANDO JUGADOR");
-    this.setState({player:player},()=>{this.evaluateV()});
+    this.setState({player:nuevo},()=>{this.evaluateV();console.log(player+" JUGADOR CAMBIADO A "+this.state.player);});
   };
-  //-----------------------------------------------------------------------------------------------------------
-  renderR1(){
-    let row1 = this.state.row1;
-    let r1 = row1.map((i)=>{
-      let x = Math.random();
-      if(i!=0){
-        return(<div key={"row1"+x} className="square">
-                <h1>{i}</h1>
-                </div>)
-      }
-      else{
-      return( <div key={"row1"+x} className="square">
-              <h1>{" "}</h1>
-              </div>
-              )
-              }
-    });
-    return (r1);
+
+  //***************************************************************************************************
+  setMove1(row, winner){
+    let player=this.state.player;
+    if(winner!=""){
+      this.setState({row1: row, winner: winner});
+      alert("Gana el jugador P"+player);
+    }
+    else {
+      this.setState({row1: row});
+    }
+    this.setPlayer();
   };
-  renderR2(){
-    let row2 = this.state.row2;
-    let r2 = row2.map((i)=>{
-      let x = Math.random();
-      if(i!=0){
-        return(<div key={"row2"+x} className="square">
-                <h1>{i}</h1>
-                </div>)
-      }
-      else{
-      return( <div key={"row2"+x} className="square">
-              <h1>{" "}</h1>
-              </div>
-              )
-              }
-    });
-    return (r2);
+  setMove2(row, winner){
+    let player=this.state.player;
+
+    if(winner!=""){
+      this.setState({row2: row, winner: winner},()=>{this.setPlayer();});
+      alert("Gana el jugador P"+player);
+    }
+    else {
+      this.setState({row2: row},()=>{this.setPlayer();});
+    }
+
   };
-  renderR3(){
-    let row3 = this.state.row3;
-    let r3 = row3.map((i)=>{
-      let x = Math.random();
-      if(i!=0){
-        return(<div key={"row3"+x} className="square">
-                <h1>{i}</h1>
-                </div>)
-      }
-      else{
-      return( <div key={"row3"+x} className="square">
-              <h1>{" "}</h1>
-              </div>
-              )
-              }
-    });
-    return (r3);
+  setMove3(row, winner){
+    let player=this.state.player;
+
+    if(winner!=""){
+      this.setState({row3: row, winner: winner},()=>{this.setPlayer();});
+      alert("Gana el jugador P"+player);
+    }
+    else {
+      this.setState({row3: row},()=>{this.setPlayer();});
+    }
+
   };
-  renderR4(){
-    let row4 = this.state.row4;
-    let r4 = row4.map((i)=>{
-      let x = Math.random();
-      if(i!=0){
-        return(<div key={"row4"+x} className="square">
-                <h1>{i}</h1>
-                </div>)
-      }
-      else{
-      return( <div key={"row4"+x} className="square">
-              <h1>{" "}</h1>
-              </div>
-              )
-              }
-    });
-    return (r4);
+  setMove4(row, winner){
+    let player=this.state.player;
+
+    if(winner!=""){
+      this.setState({row4: row, winner: winner},()=>{this.setPlayer();});
+      alert("Gana el jugador P"+player);
+    }
+    else {
+      this.setState({row4: row},()=>{this.setPlayer();});
+    }
+
   };
-  renderR5(){
-    let row5 = this.state.row5;
-    let r5 = row5.map((i)=>{
-      let x = Math.random();
-      if(i!=0){
-        return(<div key={"row5"+x} className="square">
-                <h1>{i}</h1>
-                </div>)
-      }
-      else{
-      return( <div key={"row5"+x} className="square">
-              <h1>{" "}</h1>
-              </div>
-              )
-              }
-    });
-    return (r5);
+  setMove5(row, winner){
+    let player=this.state.player;
+
+    if(winner!=""){
+      this.setState({row5: row, winner: winner},()=>{this.setPlayer();});
+      alert("Gana el jugador P"+player);
+    }
+    else {
+      this.setState({row5: row},()=>{this.setPlayer();});
+    }
+
   };
-  renderR6(){
-    let row6 = this.state.row6;
-    let r6 = row6.map((i)=>{
-      let x = Math.random();
-      if(i!=0){
-        return(<div key={"row6"+x} className="square">
-                <h1>{i}</h1>
-                </div>)
-      }
-      else{
-      return( <div key={"row6"+x} className="square">
-              <h1>{" "}</h1>
-              </div>
-              )
-              }
-    });
-    return (r6);
+  setMove6(row, winner){
+    let player=this.state.player;
+    if(winner!=""){
+      this.setState({row6: row, winner: winner},()=>{this.setPlayer();});
+      alert("Gana el jugador P"+player);
+    }
+    else {
+      this.setState({row6: row},()=>{this.setPlayer();});
+    }
   };
-  renderR7(){
-    let row7 = this.state.row7;
-    let r7 = row7.map((i)=>{
-      let x = Math.random();
-      if(i!=0){
-        return(<div key={"row7"+x} className="square">
-                <h1>{i}</h1>
-                </div>)
-      }
-      else{
-      return( <div key={"row7"+x} className="square">
-              <h1>{" "}</h1>
-              </div>
-              )
-              }
-    });
-    return (r7);
+  setMove7(row, winner){
+    let player=this.state.player;
+    if(winner!=""){
+      this.setState({row7: row, winner: winner},()=>{this.setPlayer();});
+      alert("Gana el jugador P"+player);
+    }
+    else {
+      this.setState({row7: row},()=>{this.setPlayer();});
+    }
   };
+  win(){
+    let winner =this.state.winner;
+  }
+  titulo(){
+    let player = this.state.player;
+    if(player!=0){
+      return (<h2>{"Jugador "+player+" en turno"}</h2>);
+    }
+    else {
+      return (<h2>{"Iniciando partida"}</h2>);
+    }
+  }
+    //***************************************************************************************************
   //----------------------------------------------------------------------------------------------------------------
 
   render(){
     let winner= this.state.winner;
+    let player= this.state.player;
+    console.log(player+" ENVIANDO JUGADOR "+player);
     return(
       <div className="block">
         <h2>Tablero de juego de 4 en linea</h2>
-        <h2>{"Winner: "+winner}</h2>
-
+        {this.titulo()}
         <div className="container">
-
-            <div className="col-sm-1">
-              <Button onClick={this.setMove1}>Play</Button>
-              <div className="row">
-                {this.renderR1()}
-              </div>
-            </div>
-            <div className="col-sm-1">
-              <Button onClick={this.setMove2}>Play</Button>
-              <div className="row">
-                {this.renderR2()}
-              </div>
-            </div>
-            <div className="col-sm-1">
-              <Button onClick={this.setMove3}>Play</Button>
-              <div className="row">
-                {this.renderR3()}
-              </div>
-            </div>
-            <div className="col-sm-1">
-              <Button onClick={this.setMove4}>Play</Button>
-              <div className="row">
-                {this.renderR4()}
-              </div>
-            </div>
-            <div className="col-sm-1">
-              <Button onClick={this.setMove5}>Play</Button>
-              <div className="row">
-                {this.renderR5()}
-              </div>
-            </div>
-            <div className="col-sm-1">
-              <Button onClick={this.setMove6}>Play</Button>
-              <div className="row">
-                {this.renderR6()}
-              </div>
-            </div>
-            <div className="col-sm-1">
-              <Button onClick={this.setMove7}>Play</Button>
-              <div className="row">
-                {this.renderR7()}
-              </div>
-            </div>
+          <RowB setMove={this.setMove1} player={player}/>
+          <RowB setMove={this.setMove2} player={player}/>
+          <RowB setMove={this.setMove3} player={player}/>
+          <RowB setMove={this.setMove4} player={player}/>
+          <RowB setMove={this.setMove5} player={player}/>
+          <RowB setMove={this.setMove6} player={player}/>
+          <RowB setMove={this.setMove7} player={player}/>
         </div>
       </div>
     );
