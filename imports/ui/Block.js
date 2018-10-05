@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import Square from './BoardComponents/Square.js';
 import RowB from './BoardComponents/RowB.js';
+import './App.css';
 export default class Block extends Component {
   constructor(props) {
     super(props);
@@ -224,7 +225,7 @@ export default class Block extends Component {
       <div className="block">
         <h2>Tablero de juego de 4 en linea</h2>
         {this.titulo()}
-        <div className="container">
+        <div className="container-block">
           <RowB setMove={this.setMove1} player={player}/>
           <RowB setMove={this.setMove2} player={player}/>
           <RowB setMove={this.setMove3} player={player}/>

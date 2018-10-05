@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
+import { Meteor } from "meteor/meteor";
 import { withTracker } from 'meteor/react-meteor-data';
 import { Tasks } from '../api/tasks.js';
-
+import AccountsUIWrapper from "./AccountsUIWrapper";
 import Task from './Task.js';
 import Block from './Block.js';
 // App component - represents the whole app
@@ -41,21 +42,16 @@ renderTasks() {
 
   render() {
     return (
+      <div className="App">
       <div className="container">
         <header>
           <h1>Bienvenido a 4 en linea</h1>
-          <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-            <input
-              type="text"
-              ref="textInput"
-              placeholder="Type to add new tasks"
-            />
-          </form>
+          <AccountsUIWrapper/>
         </header>
-        <Block/>
-        <ul>
-          {this.renderTasks()}
-        </ul>
+        { this.props.currentUser ?
+          <Block/>:''
+        }
+      </div>
       </div>
     );
   }
@@ -64,5 +60,6 @@ export default withTracker(() => {
   return {
     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
     incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
+    currentUser: Meteor.user(),
   };
 })(App);
