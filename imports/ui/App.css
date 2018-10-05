@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url("http://www.macenvelopes.com/Portals/_default/Skins/Minimalist-Earth-Glass/backgrounds/gray/11_image.jpg");
+  background-color: #18bc9c;
   background-repeat: no-repeat;
   background-size: cover;
   margin-left: auto;
@@ -14,13 +14,15 @@
 
 }
 .container-block {
+  float: center;
   text-align: center;
   margin: auto;
-  margin-left: auto;
+  margin-left: 30%;
   margin-right: auto;
 }
 .container {
   text-align: center;
+  float: center;
   margin: auto;
   margin-left: auto;
   margin-right: auto;
@@ -36,4 +38,69 @@
   margin: auto;
   margin-left: auto;
   margin-right: auto;
+  float: center;
+}
+
+.cosasBarra {
+  margin: auto;
+  overflow:hidden;
+}
+.barra{
+  background: #2c3e50;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  float: center;
+}
+.useri{
+  float: right;
+  margin-right: 70px;
+}
+nav {
+  float: center;
+  text-align: center;
+}
+nav ul {
+  list-style: none;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+nav ul li {
+  float: left;
+  font-family: Arial, sans-serif;
+  font-size: 40px;
+}
+nav ul li a {
+  display: block;
+  padding: 20px;
+  color: #fff;
+  text-decoration: none;
+
+}
+a{
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  float: left;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  margin-left: 30px;
+  padding: 10px;
+  list-style: none;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  color:#fff;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+h1{
+  color: #fff;
+}
+h2{
+  color: #fff;
 }

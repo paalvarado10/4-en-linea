@@ -42,16 +42,33 @@ renderTasks() {
 
   render() {
     return (
-      <div className="App">
-      <div className="container">
-        <header>
-          <h1>Bienvenido a 4 en linea</h1>
-          <AccountsUIWrapper/>
-        </header>
-        { this.props.currentUser ?
-          <Block/>:''
-        }
-      </div>
+      <div>
+
+           <nav class="barra">
+                        <a> Bienvenido a 4 en linea </a>
+                        <div class="useri">
+                          <AccountsUIWrapper/>
+                        </div>
+                        
+           </nav>
+           <br />
+           <br />
+           <br />
+
+        <div class = "App">
+
+          <div className="container">
+
+            { this.props.currentUser ?
+              <Block/>:''
+            }
+
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+        </div>
       </div>
     );
   }

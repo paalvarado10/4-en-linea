@@ -26,7 +26,6 @@ export default class Square extends Component {
         <h1>
           {this.state.x+" "+this.state.y}
         </h1>
-
       </div>
     );
     }

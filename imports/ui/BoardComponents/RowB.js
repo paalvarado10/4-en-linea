@@ -64,11 +64,9 @@ export default class RowB extends Component {
         }
         if(p1===4 || p2===4){
           if(p1===4){
-            alert("Gana el jugador P1");
             this.setState({winner: 1});
           }
           else {
-            alert("Gana el jugador P2");
             this.setState({winner: 2});
           }
         }
@@ -113,7 +111,9 @@ export default class RowB extends Component {
 
     return(
             <div className="col-sm-1">
-              <Button onClick={this.setMove}>Play</Button>
+              <Button onClick={this.setMove}>↓</Button>
+              <p>
+              </p>
               <div className="row">
                 {this.renderR()}
               </div>
