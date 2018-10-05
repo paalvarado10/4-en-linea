@@ -27,9 +27,9 @@ export default class Block extends Component {
     this.setMove6=this.setMove6.bind(this);
     this.setMove7=this.setMove7.bind(this);
     this.setPlayer=this.setPlayer.bind(this);
-    this.evaluateV=this.evaluateV.bind(this);
+    this.evaluateH=this.evaluateH.bind(this);
   }
-  evaluateV(){
+  evaluateH(){
     let m =[7];
     m[0]=this.state.row1;
     m[1]=this.state.row2;
@@ -38,16 +38,21 @@ export default class Block extends Component {
     m[4]=this.state.row5;
     m[5]=this.state.row6;
     m[6]=this.state.row7;
-    for (var i = 0; i < m.length; i++) {
-      let x = m[i];
+    let col=[];
+    for (var i = 0; i < 6; i++) {
+      for (var j = 0; j < 7; j++) {
+        let x =m[j];
+        col.push(x[i]);
+      }
       let p1=0;
       let p2=0;
       let last=0;
-      for (var j = 0; j < x.length; j++) {
+      // ya puede revisar columna
+      for (var j = 0; j < col.length; j++) {
         console.log("p1: "+p1+" p2: "+p2+" last: "+last);
-        if(last===0 && x[j]!=0){
-          last=x[j];
-          if(x[j]===1){
+        if(last===0 && col[j]!=0){
+          last=col[j];
+          if(col[j]===1){
             p1=1;
             p2=0;
           }
@@ -57,11 +62,11 @@ export default class Block extends Component {
           }
         }
         else if(last === 1){
-          if(x[j]===1){
+          if(col[j]===1){
               p1++;
               p2=0;
           }
-          else if(x[j]===2){
+          else if(col[j]===2){
             p1=0;
             last=2;
             p2++;
@@ -73,11 +78,11 @@ export default class Block extends Component {
           }
         }
         else if(last === 2){
-          if(x[j]===2){
+          if(col[j]===2){
             p2++;
             p1=0;
           }
-          else if(x[j]===1){
+          else if(col[j]===1){
             p2=0;
             p1++;
             last=1;
@@ -113,7 +118,7 @@ export default class Block extends Component {
       nuevo=1;
     }
     console.log("CAMBIANDO JUGADOR");
-    this.setState({player:nuevo},()=>{this.evaluateV();console.log(player+" JUGADOR CAMBIADO A "+this.state.player);});
+    this.setState({player:nuevo},()=>{this.evaluateH();console.log(player+" JUGADOR CAMBIADO A "+this.state.player);});
   };
 
   //***************************************************************************************************
