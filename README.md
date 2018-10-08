@@ -42,6 +42,8 @@ This game was develop with:
 
 ### Run local
 
+Before anything we recommend you to be patient because meteor can take a little to run and download 
+
 - Clone the repo by typing this in your cosole: `git clone https://github.com/paalvarado10/4-en-linea.git`
 - Use `cd 4-en-linea` to enter the main folder
 - Use `meteor npm install` to install npm dependencies
