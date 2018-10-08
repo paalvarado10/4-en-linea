@@ -7,6 +7,9 @@ import { Tasks } from '../api/tasks.js';
 import AccountsUIWrapper from "./AccountsUIWrapper";
 import Task from './Task.js';
 import Block from './Block.js';
+import {Players} from '../api/players.js';
+import PropTypes from "prop-types";
+
 // App component - represents the whole app
 class App extends Component {
   constructor(props) {
@@ -14,31 +17,84 @@ class App extends Component {
 
     this.state = {
       hideCompleted: false,
+      player:null,
+      start:false
     };
   }
-  handleSubmit(event) {
-  event.preventDefault();
 
-  // Find the text field via the React ref
-  const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+addPlayer(evt)
+{
+  evt.preventDefault();
 
-  Tasks.insert({
-    text,
-    createdAt: new Date(), // current time
+  const pl = Players.findOne({
+    name:Meteor.user().username
   });
 
-  // Clear form
-  ReactDOM.findDOMNode(this.refs.textInput).value = '';
+  if(!pl)
+  {
+      Players.insert({name:Meteor.user().username});
+      this.setState({
+      player: Meteor.user().username
+      });
+  }
+  else
+  {
+    alert("Ya estas inscrito, selecciona a tu oponente");
+  }
+
 }
-renderTasks() {
-  let filteredTasks = this.props.tasks;
-    if (this.state.hideCompleted) {
-      filteredTasks = filteredTasks.filter(task => !task.checked);
-    }
-    return filteredTasks.map((task) => (
-      <Task key={task._id} task={task} />
-    ));
+
+iniciarPartida()
+{
+  this.setState({
+    start:true
+  });
 }
+
+showPlayers()
+{
+  if(Meteor.user())
+  {
+    return(<div>
+                <h1 class="izq"> Jugadores inscritos: </h1>
+                <p></p>
+                <br/>
+                <p></p>
+                {
+                  this.state.player==null?
+                  
+                    <button class="izq" onClick={this.addPlayer.bind(this)}> INSCRIBIRME PARA JUGAR </button>
+                  :
+
+                  this.state.start ? <br/>:
+                    <h1 class="der"> Ahora selecciona tu oponente </h1>
+                  
+                }
+                
+                <br/>
+                <p></p>
+                <br/>
+                <p></p>
+                <ul>
+                {
+                  this.state.start?
+                  <Block/>
+                  :
+
+                this.renderPlayers()
+
+                }
+                </ul>
+          </div>);
+  }
+}
+
+renderPlayers()
+  {
+    return this.props.players.map((r)=>{
+      return (<div><li><button class="izq" onClick={this.iniciarPartida.bind(this)} key={r.name}> {r.name} </button><br/><br/></li></div>);
+    });
+  }
 
   render() {
     return (
@@ -59,10 +115,13 @@ renderTasks() {
 
           <div className="container">
 
-            { this.props.currentUser ?
-              <Block/>:''
-            }
+          {this.showPlayers()}
 
+                          
+            
+                
+            
+            
           </div>
           <br />
           <br />
@@ -73,10 +132,17 @@ renderTasks() {
     );
   }
 }
+
+
+App.propTypes = {
+  players:PropTypes.array.isRequired,
+  user:PropTypes.object
+};
+
 export default withTracker(() => {
   return {
-    tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
-    incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
-    currentUser: Meteor.user(),
+    players:Players.find({}).fetch(),
+    user:Meteor.user()
   };
 })(App);
+

@@ -56,6 +56,14 @@
   float: right;
   margin-right: 70px;
 }
+.izq{
+  float: left;
+  margin-left: 5%;
+}
+.der{
+  margin-top:7%;
+  float: right;
+}
 nav {
   float: center;
   text-align: center;
