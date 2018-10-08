@@ -5,6 +5,9 @@ import { withTracker } from 'meteor/react-meteor-data';
 import Square from './BoardComponents/Square.js';
 import RowB from './BoardComponents/RowB.js';
 import './App.css';
+import { Meteor } from "meteor/meteor";
+import {Partidas} from '../api/partidas.js';
+
 export default class Block extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +21,7 @@ export default class Block extends Component {
       row7: [0,0,0,0,0,0],
       row8: [0,0,0,0,0,0],
       player: 1,
+      turno:null,
       winner: ""
     };
     this.setMove1=this.setMove1.bind(this);
@@ -328,6 +332,7 @@ export default class Block extends Component {
     else{
       nuevo=1;
     }
+
     console.log("CAMBIANDO JUGADOR");
     this.setState({player:nuevo},()=>{this.evaluateH();this.evaluateV();this.evaluateD();console.log(player+" JUGADOR CAMBIADO A "+this.state.player);});
   };
@@ -417,12 +422,27 @@ export default class Block extends Component {
   }
   tablero(){
 
+    
+
     let winner =this.state.winner;
+
     if(winner==0)
     {
-            let player = this.state.player;
+
+        let player = this.state.player;
+        let turno = null;
+        if(player == 1)
+        {
+          turno=this.props.J1;
+        }
+        else
+        {
+          turno=this.props.J2;
+        }
+
         if(player!=0){
-          return (<div><h2>{"Jugador "+player+" en turno"}</h2>
+          return (<div><h2> {this.props.J1} VS  {this.props.J2} </h2> 
+            <div><h2>{"Jugador "+player+ " ("+turno+") "+ " en turno"}</h2>
                   <br/>
             <br/>
             <div className="container-block">
@@ -433,7 +453,7 @@ export default class Block extends Component {
               <RowB setMove={this.setMove5} player={player}/>
               <RowB setMove={this.setMove6} player={player}/>
               <RowB setMove={this.setMove7} player={player}/>
-            </div></div>);
+            </div></div></div>);
         }
         else {
           return (<div><h2>{"Iniciando partida"}</h2>

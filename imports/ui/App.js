@@ -8,6 +8,7 @@ import AccountsUIWrapper from "./AccountsUIWrapper";
 import Task from './Task.js';
 import Block from './Block.js';
 import {Players} from '../api/players.js';
+import {Partidas} from '../api/partidas.js';
 import PropTypes from "prop-types";
 
 // App component - represents the whole app
@@ -18,7 +19,9 @@ class App extends Component {
     this.state = {
       hideCompleted: false,
       player:null,
-      start:false
+      start:false,
+      J1:null,
+      J2:null
     };
   }
 
@@ -26,29 +29,30 @@ addPlayer(evt)
 {
   evt.preventDefault();
 
-  const pl = Players.findOne({
-    name:Meteor.user().username
-  });
+  Meteor.call("players.add", Meteor.user().username);
 
-  if(!pl)
-  {
-      Players.insert({name:Meteor.user().username});
-      this.setState({
-      player: Meteor.user().username
-      });
-  }
-  else
-  {
-    alert("Ya estas inscrito, selecciona a tu oponente");
-  }
+  
 
 }
 
-iniciarPartida()
+iniciarPartida(e)
 {
+
   this.setState({
     start:true
   });
+
+  Meteor.call("partidas.start", e.target.id, (err,x) => {
+    
+          this.setState({
+            J1:x[0],
+            J2:x[1]
+          });
+          console.log(this.state.J1);
+          console.log(this.state.J2);
+    });
+
+  
 }
 
 showPlayers()
@@ -78,7 +82,7 @@ showPlayers()
                 <ul>
                 {
                   this.state.start?
-                  <Block/>
+                  <Block J1={this.state.J1} J2={this.state.J2}/>
                   :
 
                 this.renderPlayers()
@@ -92,7 +96,7 @@ showPlayers()
 renderPlayers()
   {
     return this.props.players.map((r)=>{
-      return (<div><li><button class="izq" onClick={this.iniciarPartida.bind(this)} key={r.name}> {r.name} </button><br/><br/></li></div>);
+      return (<div><li><button class="izq" id={r.name} onClick={this.iniciarPartida.bind(this)} key={r.name}> {r.name} </button><br/><br/></li></div>);
     });
   }
 
@@ -140,6 +144,10 @@ App.propTypes = {
 };
 
 export default withTracker(() => {
+
+  Meteor.subscribe("players");
+  Meteor.subscribe("partidas");
+
   return {
     players:Players.find({}).fetch(),
     user:Meteor.user()
