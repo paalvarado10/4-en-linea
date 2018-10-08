@@ -485,7 +485,6 @@ export default class Block extends Component {
     console.log(player+" ENVIANDO JUGADOR "+player);
     return(
       <div className="block">
-        <h2>Tablero de juego de 4 en linea</h2>
         {this.tablero()}
       </div>
     );

@@ -48,8 +48,6 @@ iniciarPartida(e)
             J1:x[0],
             J2:x[1]
           });
-          console.log(this.state.J1);
-          console.log(this.state.J2);
     });
 
   
