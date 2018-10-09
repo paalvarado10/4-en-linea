@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import Square from './Square.js';
-export default class RowB extends Component {
+import {Casillas} from '../../api/casillas.js';
+import PropTypes from "prop-types";
+
+class RowB extends Component {
   constructor(props) {
     super(props);
     this.state = {
       row: [0,0,0,0,0,0],
-      winner: ""
+      winner: "",
+      actualizada:false
     };
     this.setMove=this.setMove.bind(this);
     this.evaluateV=this.evaluateV.bind(this);
@@ -87,9 +91,33 @@ export default class RowB extends Component {
       }
     }
 
-    this.setState({row:row},()=>{this.evaluateV()});
+    Meteor.call("casillas.actualizarColumna", this.props.num, this.state.row);
+
+    this.setState({row:row, actualizada:true},()=>{this.evaluateV()});
+
   }
-  renderR(){
+
+  actualizarColumna()
+  {
+      Meteor.call("casillas.darColumna", this.props.num, (err, colmn)=>{
+        if(colmn)
+        {
+          this.setState({row:colmn.columna, actualizada:true});
+
+          this.props.setMove(this.state.row, this.state.winner);
+
+          
+        }
+      });
+  }
+
+  renderR()
+  {
+    if(this.state.actualizada==false)
+    {
+      this.actualizarColumna();
+    }
+
     let row = this.state.row;
     let r = row.map((i)=>{
       let x = Math.random();
@@ -121,3 +149,17 @@ export default class RowB extends Component {
     );
   }
 }
+
+
+RowB.propTypes = {
+  casillas:PropTypes.array.isRequired
+};
+
+export default withTracker(() => {
+
+  Meteor.subscribe("casillas");
+
+  return {
+    casillas:Casillas.find({}).fetch()
+  };
+})(RowB);

@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import './App.css';
 import { Meteor } from "meteor/meteor";
 import { withTracker } from 'meteor/react-meteor-data';
-import { Tasks } from '../api/tasks.js';
 import AccountsUIWrapper from "./AccountsUIWrapper";
-import Task from './Task.js';
 import Block from './Block.js';
 import {Players} from '../api/players.js';
 import {Partidas} from '../api/partidas.js';
@@ -49,7 +47,34 @@ iniciarPartida(e)
             J2:x[1]
           });
     });
+}
 
+hayPartida()
+{
+  if(this.state.J1 == null)
+  {
+    Meteor.call("partidas.consultar", Meteor.user().username, (err,hay)=>{
+    this.setState({
+      start: hay
+          });
+    });
+
+    if(this.state.start)
+    {
+      Meteor.call("partidas.darJugadores",Meteor.user().username, (err,x) => {
+      
+      console.log(x[0]);
+      console.log(x[1]);
+
+            this.setState({
+              J1:x[0],
+              J2:x[1]
+            });
+      });
+    }
+  }
+  
+    return this.state.start;
   
 }
 
@@ -79,7 +104,7 @@ showPlayers()
                 <p></p>
                 <ul>
                 {
-                  this.state.start?
+                  this.hayPartida() ?
                   <Block J1={this.state.J1} J2={this.state.J2}/>
                   :
 

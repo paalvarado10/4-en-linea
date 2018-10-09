@@ -34,5 +34,49 @@ Meteor.methods(
 		  jugadores[1]= name;
 
 		  return jugadores;
+	},
+	"partidas.consultar":function(name){
+		const x = Partidas.findOne({
+		    J1:name
+		  });
+
+		const y = Partidas.findOne({
+		    J2:name
+		  });
+
+		if(x||y)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
+	},
+	"partidas.darJugadores":function(name){
+		const partidaDev = [2];
+
+		const x = Partidas.findOne({
+		    J1:name
+		  });
+
+		const y = Partidas.findOne({
+		    J2:name
+		  });
+
+		if(x)
+		{
+			partidaDev [0] =x.J1;
+			partidaDev [1] =x.J2;
+		}
+		else if(y)
+		{
+			partidaDev [0] =y.J1;
+			partidaDev [1] =y.J2;
+		}
+
+		return partidaDev;
 	}
+	
 });
