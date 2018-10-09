@@ -28,6 +28,10 @@ Meteor.methods(
 	  {
 	    alert("Ya estas inscrito, selecciona tu oponente");
 	  }
+	},
+	"players.eliminar":function()
+	{
+		Players.remove({});
 	}
 });
 

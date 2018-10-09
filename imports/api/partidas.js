@@ -79,7 +79,7 @@ Meteor.methods(
 
 		return partidaDev;
 	},
-	"partidas.eliminarPartida":function(name){
+	"partidas.eliminarPartida":function(){
 		Partidas.remove({});
 		
 

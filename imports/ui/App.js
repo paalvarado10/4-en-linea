@@ -21,8 +21,11 @@ class App extends Component {
       hay:false,
       J1:null,
       J2:null,
-      ganador:0
+      ganador:0,
+      firts:0
     };
+
+    
 
     this.cambiarGanador=this.cambiarGanador.bind(this);
   }
@@ -120,6 +123,12 @@ showPlayers()
                 }
                 </ul>
           </div>);
+  }
+  else
+  {
+    Meteor.call("players.eliminar");
+    Meteor.call("partidas.eliminarPartida");
+    Meteor.call("casillas.eliminarCasillas");
   }
 }
 
