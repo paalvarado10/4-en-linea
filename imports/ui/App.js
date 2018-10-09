@@ -18,9 +18,13 @@ class App extends Component {
       hideCompleted: false,
       player:null,
       start:false,
+      hay:false,
       J1:null,
-      J2:null
+      J2:null,
+      ganador:0
     };
+
+    this.cambiarGanador=this.cambiarGanador.bind(this);
   }
 
 addPlayer(evt)
@@ -28,7 +32,9 @@ addPlayer(evt)
   evt.preventDefault();
 
   Meteor.call("players.add", Meteor.user().username);
-
+this.setState({
+    hay:true
+  });
   
 
 }
@@ -44,7 +50,8 @@ iniciarPartida(e)
     
           this.setState({
             J1:x[0],
-            J2:x[1]
+            J2:x[1],
+            ganador:x[2]
           });
     });
 }
@@ -93,7 +100,7 @@ showPlayers()
                     <button class="izq" onClick={this.addPlayer.bind(this)}> INSCRIBIRME PARA JUGAR </button>
                   :
 
-                  this.state.start ? <br/>:
+                  this.state.hay ? <br/>:
                     <h1 class="der"> Ahora selecciona tu oponente </h1>
                   
                 }
@@ -105,7 +112,7 @@ showPlayers()
                 <ul>
                 {
                   this.hayPartida() ?
-                  <Block J1={this.state.J1} J2={this.state.J2}/>
+                  <Block J1={this.state.J1} J2={this.state.J2} ganador={this.state.ganador} cambiarGanador={this.cambiarGanador}/>
                   :
 
                 this.renderPlayers()
@@ -114,6 +121,13 @@ showPlayers()
                 </ul>
           </div>);
   }
+}
+
+cambiarGanador(nuevGan)
+{
+  this.setState({
+    ganador:nuevGan
+  });
 }
 
 renderPlayers()

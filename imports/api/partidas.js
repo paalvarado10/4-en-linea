@@ -29,9 +29,10 @@ Meteor.methods(
 		    alert("Partida insertada")
 		  }
 
-		  const jugadores = [2];
+		  const jugadores = [3];
 		  jugadores[0]= Meteor.user().username
 		  jugadores[1]= name;
+		  jugadores[2]= 0;
 
 		  return jugadores;
 	},
@@ -77,6 +78,11 @@ Meteor.methods(
 		}
 
 		return partidaDev;
+	},
+	"partidas.eliminarPartida":function(name){
+		Partidas.remove({});
+		
+
 	}
 	
 });

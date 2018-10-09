@@ -25,7 +25,12 @@ Meteor.methods(
 		const columna = Casillas.findOne({
 			numero:num
 		});
+
 		return columna;
+	},
+	"casillas.eliminarCasillas":function()
+	{
+		Casillas.remove({});
 	}
 
 });
