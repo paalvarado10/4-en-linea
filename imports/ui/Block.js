@@ -441,13 +441,16 @@ class Block extends Component {
 
   tablero(){
 
+    let winnerInicial = this.props.ganador;
+
     let winner =this.state.winner;
 
-    if(winner==0)
+    if(winner==0 || winnerInicial==0)
     {
 
         let player = this.state.player;
         let vecino = this.state.vecino;
+        this.props.cambiarGanador(1);
         let turno = null;
         if(player == 1)
         {
