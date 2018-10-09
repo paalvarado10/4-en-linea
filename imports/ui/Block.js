@@ -10,6 +10,11 @@ import {Partidas} from '../api/partidas.js';
 import {Casillas} from '../api/casillas.js';
 import PropTypes from "prop-types";
 
+//Orlando Sabogal: Deberian utilizar mas componentes especificos para cada función. Agrupar todo en un solo componente
+//dificulta la lectura del codigo.
+
+
+
 class Block extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +41,6 @@ class Block extends Component {
     this.setMove7=this.setMove7.bind(this);
     this.setPlayer=this.setPlayer.bind(this);
     this.evaluateH=this.evaluateH.bind(this);
-    this.acabar=this.acabar.bind(this);
   }
   evaluateH(){
     let m =[7];
@@ -104,14 +108,12 @@ class Block extends Component {
         }
         if(p1===4 || p2===4){
           if(p1===4){
-            //alert("Gana el jugador P1");
+            alert("Gana el jugador P1");
             this.setState({winner: 1});
-            this.props.cambiarGanador(this.state.winner);
           }
           else {
-            //alert("Gana el jugador P2");
+            alert("Gana el jugador P2");
             this.setState({winner: 2});
-            this.props.cambiarGanador(this.state.winner);
           }
         }
       }
@@ -183,11 +185,11 @@ class Block extends Component {
         }
         if(p1===4 || p2===4){
           if(p1===4){
-            //alert("Gana el jugador P1");
+            alert("Gana el jugador P1");
             this.setState({winner: 1});
           }
           else {
-            //alert("Gana el jugador P2");
+            alert("Gana el jugador P2");
             this.setState({winner: 2});
           }
         }
@@ -349,7 +351,7 @@ class Block extends Component {
     let player=this.state.player;
     if(winner!=""){
       this.setState({row1: row, winner: winner});
-      //alert("Gana el jugador P"+player);
+      alert("Gana el jugador P"+player);
     }
     else {
       this.setState({row1: row});
@@ -362,7 +364,7 @@ class Block extends Component {
 
     if(winner!=""){
       this.setState({row2: row, winner: winner},()=>{this.setPlayer();});
-      //alert("Gana el jugador P"+player);
+      alert("Gana el jugador P"+player);
     }
     else {
       this.setState({row2: row},()=>{this.setPlayer();});
@@ -374,7 +376,7 @@ class Block extends Component {
 
     if(winner!=""){
       this.setState({row3: row, winner: winner},()=>{this.setPlayer();});
-      //alert("Gana el jugador P"+player);
+      alert("Gana el jugador P"+player);
     }
     else {
       this.setState({row3: row},()=>{this.setPlayer();});
@@ -386,7 +388,7 @@ class Block extends Component {
 
     if(winner!=""){
       this.setState({row4: row, winner: winner},()=>{this.setPlayer();});
-      //alert("Gana el jugador P"+player);
+      alert("Gana el jugador P"+player);
     }
     else {
       this.setState({row4: row},()=>{this.setPlayer();});
@@ -398,7 +400,7 @@ class Block extends Component {
 
     if(winner!=""){
       this.setState({row5: row, winner: winner},()=>{this.setPlayer();});
-      //alert("Gana el jugador P"+player);
+      alert("Gana el jugador P"+player);
     }
     else {
       this.setState({row5: row},()=>{this.setPlayer();});
@@ -409,7 +411,7 @@ class Block extends Component {
     let player=this.state.player;
     if(winner!=""){
       this.setState({row6: row, winner: winner},()=>{this.setPlayer();});
-      //alert("Gana el jugador P"+player);
+      alert("Gana el jugador P"+player);
     }
     else {
       this.setState({row6: row},()=>{this.setPlayer();});
@@ -419,7 +421,7 @@ class Block extends Component {
     let player=this.state.player;
     if(winner!=""){
       this.setState({row7: row, winner: winner},()=>{this.setPlayer();});
-      //alert("Gana el jugador P"+player);
+      alert("Gana el jugador P"+player);
     }
     else {
       this.setState({row7: row},()=>{this.setPlayer();});
@@ -428,18 +430,9 @@ class Block extends Component {
   win(){
     let winner =this.state.winner;
   }
-
-  acabar()
-  {
-      Meteor.call("partidas.eliminarPartida");
-      Meteor.call("casillas.eliminarCasillas");
-      
-      this.setState({
-        winner:0
-      });
-  }
-
   tablero(){
+
+    
 
     let winner =this.state.winner;
 
@@ -490,8 +483,7 @@ class Block extends Component {
     }
     else
     {
-      //
-let gan = null;
+      let gan = null;
       if(this.state.winner == 1)
       {
         gan = this.props.J1;
@@ -500,20 +492,7 @@ let gan = null;
       {
         gan = this.props.J2;
       }
-
-      if(this.state.winner != 0)
-      {
-        Meteor.call("partidas.consultar", (err, res)=>{
-          if(!res)
-          {
-            this.setState({
-              winner:0
-               });
-          }
-        });
-      }
-
-      return(<div><h1>La partida terminó, ganó {gan}</h1><button onClick={this.acabar}>Revancha</button></div>);
+      return(<h1>La partida terminó, ganó {gan}</h1>)
     }
     
   }
@@ -537,7 +516,6 @@ Block.propTypes = {
 
 export default withTracker(() => {
 
-Meteor.subscribe("partidas");
   Meteor.subscribe("casillas");
 
   return {
