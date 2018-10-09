@@ -7,7 +7,7 @@ import RowB from './BoardComponents/RowB.js';
 import './App.css';
 import { Meteor } from "meteor/meteor";
 import {Partidas} from '../api/partidas.js';
-
+//El codigo de este componente es bastante extenso por lo que deberian agregar mas comentarios y marcaciones para no perderse en él
 export default class Block extends Component {
   constructor(props) {
     super(props);
