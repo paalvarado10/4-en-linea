@@ -33,8 +33,8 @@ class LeaderBoard extends Component {
     this.render();
     }
   }*/
-  {
     renderList()
+    {
     let records = Meteor.call("records.getGanadores");;
       if(records)
       {
