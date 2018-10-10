@@ -6,7 +6,7 @@ export const Records = new Mongo.Collection('records');
 if(Meteor.isServer)
 {
 	Meteor.publish("records", ()=>{
-		return Records.find();
+		return Records.find({});
 	});
 }
 
