@@ -519,7 +519,6 @@ let p2 = this.props.J2;
           }
         });
       }
-      console.log("Lo esta Guardando: Player1: "+p1+", Player2: "+p2+", Winner: "+ gan);
       Meteor.call("records.nuevoGanador",p1,p2,gan   ,(err,res)=>{if(err){console.log("ERRORRRR: "+err);}else{console.log("SUCCESS: "+res)}});
       return(<div><h1>La partida terminó, ganó {gan}</h1><button onClick={this.acabar}>Revancha</button></div>);
     }
@@ -529,7 +528,6 @@ let p2 = this.props.J2;
   render(){
     let winner= this.state.winner;
     let player= this.state.player;
-    console.log(player+" ENVIANDO JUGADOR "+player);
     return(
       <div className="block">
         {this.tablero()}
