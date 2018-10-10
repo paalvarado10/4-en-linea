@@ -96,4 +96,6 @@ export default withTracker(() => {
     records:Records.find({}).fetch(),
   };
 })(LeaderBoard);
+
+lines to delete
 */
