@@ -71,6 +71,10 @@ class LeaderBoard extends Component {
       dataAvaible= false;
     }
     console.log(records);
+    console.log("records find");
+    console.log(Records.find({}).fetch());
+    console.log("records find");
+
     let recordAvaible = (dataAvaible && records);
     return (
       <div>
