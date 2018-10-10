@@ -149,9 +149,6 @@ renderPlayers()
   }
 
   render() {
-    console.log("EN EL APP");
-        console.log(this.props.records);
-        console.log("EN EL APP");
     return (
       <div>
 
@@ -170,16 +167,8 @@ renderPlayers()
         <div className="container">
         <LeaderBoard records={this.props.records}/>
         </div>
-
           <div className="container">
-
           {this.showPlayers()}
-
-
-
-
-
-
           </div>
           <br />
           <br />
