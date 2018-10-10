@@ -22,19 +22,22 @@ class LeaderBoard extends Component {
       if(records)
       {
         this.setState({rec:records},()=>{
-        console.log("Lista de records: "+this.state.rec);
+        console.log("Lista de records dentro del should update 1: ");
+        console.log(this.state.rec);
+        console.log("Lista de records dentro del should update 2: ");
         });
       }
     });
   }
   renderList()
   {
-
     Meteor.call("records.getGanadores", (err, records)=>{
       if(records)
       {
       //  this.setState({rec:records});
-        console.log("Lista de records: "+records);
+        console.log("Lista de records dentro del render list 1: "+records);
+                console.log(records);
+                console.log("Lista de records dentro del render list 2: "+records);
         let list = records.map((rec)=>{
           return(<tr><td>{rec.winner}</td><td>{rec.player1}</td><td>{rec.player2}</td></tr>)
         });
@@ -45,12 +48,15 @@ class LeaderBoard extends Component {
           </table>
         );
       }
+      else
+      {
+        return (
+        <table>
+        <tr><th>Ganador</th><th>Jugador 1</th><th>Jugador 2</th></tr>
+        </table>
+      }
 
     });
-    return (
-    <table>
-    <tr><th>Ganador</th><th>Jugador 1</th><th>Jugador 2</th></tr>
-    </table>
   );
   }
   render() {
