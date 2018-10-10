@@ -5,6 +5,7 @@ import { Meteor } from "meteor/meteor";
 import { withTracker } from 'meteor/react-meteor-data';
 import AccountsUIWrapper from "./AccountsUIWrapper";
 import Block from './Block.js';
+import LeaderBoard from './LeaderBoard.js';
 import {Players} from '../api/players.js';
 import {Partidas} from '../api/partidas.js';
 import PropTypes from "prop-types";
@@ -25,7 +26,7 @@ class App extends Component {
       firts:0
     };
 
-    
+
 
     this.cambiarGanador=this.cambiarGanador.bind(this);
   }
@@ -38,7 +39,7 @@ addPlayer(evt)
 this.setState({
     hay:true
   });
-  
+
 
 }
 
@@ -50,7 +51,7 @@ iniciarPartida(e)
   });
 
   Meteor.call("partidas.start", e.target.id, (err,x) => {
-    
+
           this.setState({
             J1:x[0],
             J2:x[1],
@@ -72,7 +73,7 @@ hayPartida()
     if(this.state.start)
     {
       Meteor.call("partidas.darJugadores",Meteor.user().username, (err,x) => {
-      
+
       console.log(x[0]);
       console.log(x[1]);
 
@@ -83,9 +84,9 @@ hayPartida()
       });
     }
   }
-  
+
     return this.state.start;
-  
+
 }
 
 showPlayers()
@@ -99,15 +100,15 @@ showPlayers()
                 <p></p>
                 {
                   this.state.player==null?
-                  
+
                     <button class="izq" onClick={this.addPlayer.bind(this)}> INSCRIBIRME PARA JUGAR </button>
                   :
 
                   this.state.hay ? <br/>:
                     <h1 class="der"> Ahora selecciona tu oponente </h1>
-                  
+
                 }
-                
+
                 <br/>
                 <p></p>
                 <br/>
@@ -155,23 +156,26 @@ renderPlayers()
                         <div class="useri">
                           <AccountsUIWrapper/>
                         </div>
-                        
+
            </nav>
            <br />
            <br />
            <br />
 
         <div class = "App">
+        <div className="container">
+        <LeaderBoard/>
+        </div>
 
           <div className="container">
 
           {this.showPlayers()}
 
-                          
-            
-                
-            
-            
+
+
+
+
+
           </div>
           <br />
           <br />
@@ -199,4 +203,3 @@ export default withTracker(() => {
     user:Meteor.user()
   };
 })(App);
-
