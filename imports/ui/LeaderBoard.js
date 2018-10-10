@@ -48,18 +48,22 @@ export default class LeaderBoard extends Component {
           return(<tr><td>{rec.winner}</td><td>{rec.player1}</td><td>{rec.player2}</td></tr>)
         });
         return (
+          <div style="overflow-x:auto;">
           <table>
           <tr><th>Ganador</th><th>Jugador 1</th><th>Jugador 2</th></tr>
           {list}
           </table>
+          </div>
         );
       }
       else
       {
         return (
+            <div style="overflow-x:auto;">
         <table>
         <tr><th>Ganador</th><th>Jugador 1</th><th>Jugador 2</th></tr>
         </table>
+        </div>
         );
       }
   }

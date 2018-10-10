@@ -6,14 +6,24 @@
   margin-left: auto;
   margin-right: auto;
 }
-.table-div {
-  border: 2px solid #999;
-  float: center;
-  text-align: center;
-  margin: auto;
-  margin-left: auto;
-  margin-right: auto;
+table {
+    width: 100%;
+    border: 2px solid black;
+    text-align: center;
+    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
+th {
+    background-color: #C9C9C9;
+    color: black;
+    text-align: center;
+}
+th, td {
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
 .square {
   border: 1px solid #999;
   text-align: center;
