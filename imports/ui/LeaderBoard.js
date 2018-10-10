@@ -30,6 +30,7 @@ class LeaderBoard extends Component {
     }
     else {
     console.log("Ya hay lista de records en el should update");
+    this.render();
     }
   }
   renderList()
