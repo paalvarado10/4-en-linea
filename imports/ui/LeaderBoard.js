@@ -18,27 +18,28 @@ class LeaderBoard extends Component {
   }
   shouldComponentUpdate()
   {
-    Meteor.call("records.getGanadores", (err, records)=>{
-      if(records)
-      {
-        this.setState({rec:records},()=>{
-        console.log("Lista de records dentro del should update 1: ");
-        console.log(this.state.rec);
-        console.log("Lista de records dentro del should update 2: ");
-        });
-      }
-    });
+    let records = this.state.rec;
+    if(records.length>=1)
+    {
+      Meteor.call("records.getGanadores", (err, records)=>{
+        if(records)
+        {
+          this.setState({rec:records});
+        }
+      });
+    }
+    else {
+    console.log("Ya hay lista de records en el should update");
+    }
   }
   renderList()
   {
-    Meteor.call("records.getGanadores", (err, records)=>{
+    let records = this.state.rec;
       if(records)
       {
-      //  this.setState({rec:records});
-        console.log("Lista de records dentro del render list 1: "+records);
-                console.log(records);
-                console.log("Lista de records dentro del render list 2: "+records);
-        let list = records.map((rec)=>{
+        let list = records.map((rec, i)=>{
+          console.log("dentro del map: "+i);
+          console.log(rec);
           return(<tr><td>{rec.winner}</td><td>{rec.player1}</td><td>{rec.player2}</td></tr>)
         });
         return (
@@ -56,14 +57,8 @@ class LeaderBoard extends Component {
         </table>
         );
       }
-    });
   }
   render() {
-    let r = this.state.rec;
-    if (r){
-      console.log(r+" RECORDS EN EL STATE");
-    }
-    console.log(this.props.records+" IMPRIMIENDO RECORDS DEL PROPS");
     return (
       <div>
       <h2>Lista de Partidas Jugadas</h2>
@@ -72,8 +67,6 @@ class LeaderBoard extends Component {
     );
   }
 }
-
-
 LeaderBoard.propTypes = {
   records:PropTypes.array.isRequired,
 };

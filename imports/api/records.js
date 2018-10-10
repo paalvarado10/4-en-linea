@@ -15,13 +15,11 @@ Meteor.methods(
 {
 	"records.nuevoGanador":function(player1, player2, winner)
 	{
-    console.log("Lo esta Guardando: Player1: "+player1+", Player2: "+player2+", Winner: "+ winner);
     const r = Records.findOne({
       player1:player1,
       player2:player2,
       winner:winner
     });
-    console.log("ENCUENTRA ESTO EN EL FIND ONE: "+r);
       if(r){
         console.log("Ya lo guardo");
         return "err: Ya lo guardo";
@@ -39,11 +37,6 @@ Meteor.methods(
 	"records.getGanadores":function()
 	{
     const record = Records.find({}).fetch();
-    console.log("RECORDS EN METEOR METHODS"+record);
-    console.log(record);
-    console.log(JSON.stringify(record));
-    console.log(record[0]);
-
     	return record;
 	}
 });
