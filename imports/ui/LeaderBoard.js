@@ -35,9 +35,10 @@ class LeaderBoard extends Component {
   }
   renderList()
   {
-    let records = this.state.rec;
+    let records = this.props.records;
       if(records)
       {
+        console.log("dentro del map: "+records);
         let list = records.map((rec, i)=>{
           console.log("dentro del map: "+i);
           console.log(rec);
@@ -63,7 +64,7 @@ class LeaderBoard extends Component {
     return (
       <div>
       <h2>Lista de Partidas Jugadas</h2>
-      {this.renderList()}
+      {this.props.loading ? <span>...Cargando...</span> : this.renderList()}
       </div>
     );
   }
@@ -73,8 +74,9 @@ LeaderBoard.propTypes = {
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("records");
+  const handle =Meteor.subscribe("records");
   return {
+    loading: !handle.ready(),
     records:Records.find({}).fetch(),
   };
 })(LeaderBoard);
