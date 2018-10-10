@@ -15,11 +15,19 @@ Meteor.methods(
 {
 	"records.nuevoGanador":function(player1, player2, winner)
 	{
-		 return Records.insert({
-			player1:player1,
+    const r = Records.findOne({
+      player1:player1,
       player2:player2,
       winner:winner
-		});
+     });
+     if(!r)
+     {
+       Records.insert({
+        player1:player1,
+        player2:player2,
+        winner:winner
+      });
+     }
 	},
 	"records.getGanadores":function()
 	{
