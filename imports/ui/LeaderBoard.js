@@ -33,9 +33,9 @@ class LeaderBoard extends Component {
     this.render();
     }
   }*/
-  renderList()
   {
-    let records = this.props.records;
+    renderList()
+    let records = Meteor.call("records.getGanadores");;
       if(records)
       {
         console.log("dentro del map: "+records);
