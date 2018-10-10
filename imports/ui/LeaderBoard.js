@@ -54,10 +54,9 @@ class LeaderBoard extends Component {
         <table>
         <tr><th>Ganador</th><th>Jugador 1</th><th>Jugador 2</th></tr>
         </table>
+        );
       }
-
     });
-  );
   }
   render() {
     let r = this.state.rec;
