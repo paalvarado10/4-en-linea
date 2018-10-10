@@ -15,11 +15,7 @@ export default class LeaderBoard extends Component {
     };
     this.renderList=this.renderList.bind(this);
   }
-<<<<<<< HEAD
       renderList(list)
-=======
-    renderList(list)
->>>>>>> parent of 7d9570a... Revert "style"
     {
     let records = list;
       if(records)
@@ -45,27 +41,19 @@ export default class LeaderBoard extends Component {
   }
   render() {
     let dataAvaible = true;
-<<<<<<< HEAD
     let records =this.props.records
     console.log("en el LeaderBoard");
     console.log(records);
     console.log("en el LeaderBoard");
-=======
-    let records =this.props.records;
->>>>>>> parent of 7d9570a... Revert "style"
     if(records === undefined)
     {
       dataAvaible= false;
     }
-<<<<<<< HEAD
     console.log(records);
-=======
->>>>>>> parent of 7d9570a... Revert "style"
     let recordAvaible = (dataAvaible && records);
     return (
       <div>
       <h2>Lista de Partidas Jugadas</h2>
-<<<<<<< HEAD
 <div className="container">
       <table>
         <td>
@@ -95,11 +83,6 @@ export default class LeaderBoard extends Component {
       </table>
 </div>
     {recordAvaible ? this.renderList(records): null}
-=======
-        <div className="table-div">
-          {recordAvaible ? this.renderList(records): null}
-        </div>
->>>>>>> parent of 7d9570a... Revert "style"
       </div>
     );
   }
