@@ -23,7 +23,9 @@ th, td {
     border-bottom: 2px solid black;
     text-align: center;
 }
-
+.tdiv {
+  overflow-x: auto;
+}
 .square {
   border: 1px solid #999;
   text-align: center;
