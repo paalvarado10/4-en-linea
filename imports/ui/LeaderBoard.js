@@ -16,7 +16,7 @@ class LeaderBoard extends Component {
     };
     this.renderList=this.renderList.bind(this);
   }
-  shouldComponentUpdate()
+/*  shouldComponentUpdate()
   {
     let records = this.state.rec;
     if(records.length>=1)
@@ -32,7 +32,7 @@ class LeaderBoard extends Component {
     console.log("Ya hay lista de records en el should update");
     this.render();
     }
-  }
+  }*/
   renderList()
   {
     let records = this.props.records;
@@ -64,7 +64,35 @@ class LeaderBoard extends Component {
     return (
       <div>
       <h2>Lista de Partidas Jugadas</h2>
-      {this.props.loading ? <span>...Cargando...</span> : this.renderList()}
+<div className="container">
+      <table>
+        <td>
+          <th>
+          Ganador
+          </th>
+          <th>
+          Jugador 1
+          </th>
+          <th>
+          Jugador 2
+          </th>
+        </td>
+        {this.props.records.map((record, i)=>
+          <td key={i}>
+            <th>
+            {record.winner}
+            </th>
+            <th>
+            {record.player1}
+            </th>
+            <th>
+            {record.player2}
+            </th>
+          </td>
+        )}
+      </table>
+</div>
+    {this.renderList()}
       </div>
     );
   }
@@ -72,11 +100,8 @@ class LeaderBoard extends Component {
 LeaderBoard.propTypes = {
   records:PropTypes.array.isRequired,
 };
-
 export default withTracker(() => {
-  const handle =Meteor.subscribe("records");
   return {
-    loading: !handle.ready(),
     records:Records.find({}).fetch(),
   };
 })(LeaderBoard);
