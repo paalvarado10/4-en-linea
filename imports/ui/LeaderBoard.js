@@ -63,11 +63,12 @@ class LeaderBoard extends Component {
   }
   render() {
     let dataAvaible = true;
-    let records = this.props.records;
+    let records = Meteor.call("records.getGanadores");
     if(records === undefined)
     {
       dataAvaible= false;
     }
+    console.log(records);
     let recordAvaible = (dataAvaible && records);
     return (
       <div>

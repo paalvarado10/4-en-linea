@@ -37,6 +37,9 @@ Meteor.methods(
 	"records.getGanadores":function()
 	{
     const record = Records.find({}).fetch();
+		console.log("dentro del method");
+		console.log(record);
+		console.log("dentro del method");
     	return record;
 	}
 });
