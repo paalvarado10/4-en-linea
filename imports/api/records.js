@@ -38,6 +38,8 @@ Meteor.methods(
 	},
 	"records.getGanadores":function()
 	{
-    	return Records.find({});
+    const record = Records.find({});
+    console.log("RECORDS EN METEOR METHODS"+record);
+    	return record;
 	}
 });

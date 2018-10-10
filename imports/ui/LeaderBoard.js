@@ -18,16 +18,12 @@ class LeaderBoard extends Component {
   }
   shouldComponentUpdate()
   {
-
-
-
     Meteor.call("records.getGanadores", (err, records)=>{
       if(records)
       {
         this.setState({rec:records},()=>{
         console.log("Lista de records: "+this.state.rec);
         });
-
       }
     });
   }
