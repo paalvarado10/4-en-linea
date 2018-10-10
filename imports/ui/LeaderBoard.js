@@ -15,18 +15,16 @@ export default class LeaderBoard extends Component {
     };
     this.renderList=this.renderList.bind(this);
   }
+<<<<<<< HEAD
       renderList(list)
+=======
+    renderList(list)
+>>>>>>> parent of 7d9570a... Revert "style"
     {
-      console.log(list);
-      console.log(" records en el props ");
-      console.log(this.props.records);
     let records = list;
       if(records)
       {
-        console.log("dentro del map: "+records);
         let list = records.map((rec, i)=>{
-          console.log("dentro del map: "+i);
-          console.log(rec);
           return(<tr><td>{rec.winner}</td><td>{rec.player1}</td><td>{rec.player2}</td></tr>)
         });
         return (
@@ -47,19 +45,27 @@ export default class LeaderBoard extends Component {
   }
   render() {
     let dataAvaible = true;
+<<<<<<< HEAD
     let records =this.props.records
     console.log("en el LeaderBoard");
     console.log(records);
     console.log("en el LeaderBoard");
+=======
+    let records =this.props.records;
+>>>>>>> parent of 7d9570a... Revert "style"
     if(records === undefined)
     {
       dataAvaible= false;
     }
+<<<<<<< HEAD
     console.log(records);
+=======
+>>>>>>> parent of 7d9570a... Revert "style"
     let recordAvaible = (dataAvaible && records);
     return (
       <div>
       <h2>Lista de Partidas Jugadas</h2>
+<<<<<<< HEAD
 <div className="container">
       <table>
         <td>
@@ -89,6 +95,11 @@ export default class LeaderBoard extends Component {
       </table>
 </div>
     {recordAvaible ? this.renderList(records): null}
+=======
+        <div className="table-div">
+          {recordAvaible ? this.renderList(records): null}
+        </div>
+>>>>>>> parent of 7d9570a... Revert "style"
       </div>
     );
   }
