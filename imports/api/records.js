@@ -38,7 +38,7 @@ Meteor.methods(
 	},
 	"records.getGanadores":function()
 	{
-    const record = Records.find({});
+    const record = Records.find({}).fetch();
     console.log("RECORDS EN METEOR METHODS"+record);
     	return record;
 	}
