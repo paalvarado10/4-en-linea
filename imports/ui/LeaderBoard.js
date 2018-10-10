@@ -83,34 +83,6 @@ export default class LeaderBoard extends Component {
     return (
       <div>
       <h2>Lista de Partidas Jugadas</h2>
-<div className="container">
-      <table>
-        <td>
-          <th>
-          Ganador
-          </th>
-          <th>
-          Jugador 1
-          </th>
-          <th>
-          Jugador 2
-          </th>
-        </td>
-        {this.props.records.map((record, i)=>
-          <td key={i}>
-            <th>
-            {record.winner}
-            </th>
-            <th>
-            {record.player1}
-            </th>
-            <th>
-            {record.player2}
-            </th>
-          </td>
-        )}
-      </table>
-</div>
     {recordAvaible ? this.renderList(records): null}
       </div>
     );
