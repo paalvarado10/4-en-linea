@@ -7,7 +7,7 @@ if(Meteor.isServer)
 {
 	Meteor.publish("partidas", ()=>{
 	return Partidas.find({});
-	});	
+	});
 }
 
 Meteor.methods(
@@ -26,7 +26,7 @@ Meteor.methods(
 		      J2:name,
 		      actual:true
 		    })
-		    alert("Partida insertada")
+		    //alert("Partida insertada")
 		  }
 
 		  const jugadores = [3];
@@ -81,8 +81,8 @@ Meteor.methods(
 	},
 	"partidas.eliminarPartida":function(){
 		Partidas.remove({});
-		
+
 
 	}
-	
+
 });

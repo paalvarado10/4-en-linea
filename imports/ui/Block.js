@@ -8,6 +8,8 @@ import './App.css';
 import { Meteor } from "meteor/meteor";
 import {Partidas} from '../api/partidas.js';
 import {Casillas} from '../api/casillas.js';
+import {Records} from '../api/records.js';
+
 import PropTypes from "prop-types";
 
 class Block extends Component {
@@ -249,12 +251,12 @@ class Block extends Component {
                   //Cuatro, gano
                   alert("Gana el jugador P1");
                   this.setState({winner: 1});
-                } 
+                }
               }
             }
 
             //Izquierda arriba para P1
-            
+
             let xi = i-1;
             let yi =  j-1;
             if( xi >= 0 && yi >=0 && matriz[xi][yi] == 1)
@@ -272,7 +274,7 @@ class Block extends Component {
                   //Cuatro, gano
                   alert("Gana el jugador P1");
                   this.setState({winner: 1});
-                } 
+                }
               }
             }
 
@@ -297,12 +299,12 @@ class Block extends Component {
                 //Cuatro, gano
                 alert("Gana el jugador P2");
                 this.setState({winner: 2});
-              } 
+              }
             }
           }
 
           //Izquierda arriba para P2
-            
+
             let xi = i-1;
             let yi =  j-1;
             if( xi >= 0 && yi >=0 && matriz[xi][yi] == 2)
@@ -320,7 +322,7 @@ class Block extends Component {
                   //Cuatro, gano
                   alert("Gana el jugador P2");
                   this.setState({winner: 2});
-                } 
+                }
               }
             }
         }
@@ -433,7 +435,7 @@ class Block extends Component {
   {
       Meteor.call("partidas.eliminarPartida");
       Meteor.call("casillas.eliminarCasillas");
-      
+
       this.setState({
         winner:0
       });
@@ -462,7 +464,7 @@ class Block extends Component {
         }
 
         if(player!=0){
-          return (<div><h2> {this.props.J1} VS  {this.props.J2} </h2> 
+          return (<div><h2> {this.props.J1} VS  {this.props.J2} </h2>
             <div><h2>{"Jugador "+player+ " ("+turno+") "+ " en turno"}</h2>
                   <br/>
             <br/>
@@ -495,6 +497,8 @@ class Block extends Component {
     {
       //
 let gan = null;
+let p1 = this.props.J1;
+let p2 = this.props.J2;
       if(this.state.winner == 1)
       {
         gan = this.props.J1;
@@ -515,10 +519,20 @@ let gan = null;
           }
         });
       }
+      console.log("Llega llega");
+      Meteor.call("records.nuevoGanador",p1,p2,gan, (err, res)=>{
+        if(res){
+          alert("GUARDADA CON EXITO");
+        }
+        if(err){
+          alert(err);
 
+        }
+        console.log("GUARDA");
+      });
       return(<div><h1>La partida terminó, ganó {gan}</h1><button onClick={this.acabar}>Revancha</button></div>);
     }
-    
+
   }
 
 
@@ -535,15 +549,17 @@ let gan = null;
 }
 
 Block.propTypes = {
-  casillas:PropTypes.array.isRequired
+  casillas:PropTypes.array.isRequired,
+  records:PropTypes.array
 };
 
 export default withTracker(() => {
 
 Meteor.subscribe("partidas");
   Meteor.subscribe("casillas");
-
+  Meteor.subscribe("records");
   return {
-    casillas:Casillas.find({}).fetch()
+    casillas:Casillas.find({}).fetch(),
+    records: Records.find({}).fetch()
   };
 })(Block);
