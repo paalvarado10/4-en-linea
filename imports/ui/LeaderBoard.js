@@ -33,9 +33,10 @@ class LeaderBoard extends Component {
     this.render();
     }
   }*/
-    renderList()
+    renderList(list)
     {
-    let records = Meteor.call("records.getGanadores");;
+      console.log(list);
+    let records = list;
       if(records)
       {
         console.log("dentro del map: "+records);
@@ -61,6 +62,13 @@ class LeaderBoard extends Component {
       }
   }
   render() {
+    let dataAvaible = true;
+    let records = this.props.records;
+    if(records === undefined)
+    {
+      dataAvaible= false;
+    }
+    let recordAvaible = (dataAvaible && records);
     return (
       <div>
       <h2>Lista de Partidas Jugadas</h2>
@@ -92,7 +100,7 @@ class LeaderBoard extends Component {
         )}
       </table>
 </div>
-    {this.renderList()}
+    {recordAvaible ? this.renderList(records): null}
       </div>
     );
   }
