@@ -6,6 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import AccountsUIWrapper from "./AccountsUIWrapper";
 import {Records} from '../api/records.js';
 import PropTypes from "prop-types";
+// App component - represents the whole app
 export default class LeaderBoard extends Component {
   constructor(props) {
     super(props);
@@ -15,12 +16,35 @@ export default class LeaderBoard extends Component {
     };
     this.renderList=this.renderList.bind(this);
   }
-      renderList(list)
+/*  shouldComponentUpdate()
+  {
+    let records = this.state.rec;
+    if(records.length>=1)
     {
+      Meteor.call("records.getGanadores", (err, records)=>{
+        if(records)
+        {
+          this.setState({rec:records});
+        }
+      });
+    }
+    else {
+    console.log("Ya hay lista de records en el should update");
+    this.render();
+    }
+  }*/
+    renderList(list)
+    {
+      console.log(list);
+      console.log(" records en el props ");
+      console.log(this.props.records);
     let records = list;
       if(records)
       {
+        console.log("dentro del map: "+records);
         let list = records.map((rec, i)=>{
+          console.log("dentro del map: "+i);
+          console.log(rec);
           return(<tr><td>{rec.winner}</td><td>{rec.player1}</td><td>{rec.player2}</td></tr>)
         });
         return (
@@ -41,6 +65,7 @@ export default class LeaderBoard extends Component {
   }
   render() {
     let dataAvaible = true;
+    //let records = Meteor.call("records.getGanadores");
     let records =this.props.records
     console.log("en el LeaderBoard");
     console.log(records);
@@ -50,6 +75,10 @@ export default class LeaderBoard extends Component {
       dataAvaible= false;
     }
     console.log(records);
+    console.log("records find");
+    //console.log(Records.find({}).fetch());
+    console.log("records find");
+
     let recordAvaible = (dataAvaible && records);
     return (
       <div>
@@ -58,7 +87,7 @@ export default class LeaderBoard extends Component {
       <table>
         <td>
           <th>
-          Ganador i
+          Ganador
           </th>
           <th>
           Jugador 1
@@ -87,3 +116,12 @@ export default class LeaderBoard extends Component {
     );
   }
 }
+/*LeaderBoard.propTypes = {
+  records:PropTypes.array.isRequired,
+};
+export default withTracker(() => {
+  return {
+    records:Records.find({}).fetch(),
+  };
+})(LeaderBoard);
+*/
