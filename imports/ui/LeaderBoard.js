@@ -36,6 +36,8 @@ class LeaderBoard extends Component {
     renderList(list)
     {
       console.log(list);
+      console.log(" records en el props ");
+      console.log(this.props.records);
     let records = list;
       if(records)
       {
