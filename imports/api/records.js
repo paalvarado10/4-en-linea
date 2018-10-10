@@ -20,8 +20,10 @@ Meteor.methods(
       player2:player2,
       winner:winner
     }, (r)=>{
+      console.log("ESTE ES EL RESULTADO DEL FIND ONE=> "+r+" <= PILAS");
       if(r){
         console.log("Ya lo guardo");
+        return "err: Ya lo guardo";
       }
       else
       {
@@ -31,6 +33,7 @@ Meteor.methods(
          player2:player2,
          winner:winner
        });
+       return "success: Guardado correctamente";
       }
     });
 	},
