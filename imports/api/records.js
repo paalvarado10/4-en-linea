@@ -40,6 +40,10 @@ Meteor.methods(
 	{
     const record = Records.find({}).fetch();
     console.log("RECORDS EN METEOR METHODS"+record);
+    console.log(record);
+    console.log(JSON.stringify(record));
+    console.log(record[0]);
+
     	return record;
 	}
 });
