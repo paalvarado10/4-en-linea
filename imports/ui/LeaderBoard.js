@@ -45,25 +45,42 @@ export default class LeaderBoard extends Component {
         let list = records.map((rec, i)=>{
           console.log("dentro del map: "+i);
           console.log(rec);
-          return(<tr><td>{rec.winner}</td><td>{rec.player1}</td><td>{rec.player2}</td></tr>)
+          return(
+            <tr>
+              <th scope="row">{rec.winner}</th>
+              <td>{rec.player1}</td>
+              <td>{rec.player2}</td>
+            </tr>)
         });
         return (
           <div className="tdiv">
-          <table>
-          <tr><th>Ganador</th><th>Jugador 1</th><th>Jugador 2</th></tr>
-          {list}
-          </table>
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Ganador</th>
+                  <th scope="col">Jugador 1</th>
+                  <th scope="col">Jugador 2</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {list}
+              </tbody>
+            </table>
           </div>
         );
       }
       else
       {
         return (
-            <div style="overflow-x:auto;">
-        <table>
-        <tr><th>Ganador</th><th>Jugador 1</th><th>Jugador 2</th></tr>
-        </table>
-        </div>
+            <div className="tdiv">
+              <table>
+                <tr>
+                  <th>Ganador</th>
+                  <th>Jugador 1</th>
+                  <th>Jugador 2</th>
+                  </tr>
+              </table>
+            </div>
         );
       }
   }
