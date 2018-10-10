@@ -520,19 +520,9 @@ let p2 = this.props.J2;
         });
       }
       console.log("Llega llega");
-      Meteor.call("records.nuevoGanador",p1,p2,gan, (err, res)=>{
-        if(res){
-          alert("GUARDADA CON EXITO");
-        }
-        if(err){
-          alert(err);
-
-        }
-        console.log("GUARDA");
-      });
+      Meteor.call("records.nuevoGanador",p1,p2,gan   ,(err, res)=>{if(err){console.log("ERRORRRR: "+err);}else{console.log("SUCCESS: "+res)}});
       return(<div><h1>La partida terminó, ganó {gan}</h1><button onClick={this.acabar}>Revancha</button></div>);
     }
-
   }
 
 
