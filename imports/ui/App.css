@@ -8,12 +8,12 @@
 }
 table {
     width: 100%;
-    border: 2px solid black;
     text-align: center;
     margin: auto;
     margin-left: auto;
     margin-right: auto;
     font-size: 15px;
+    background-color: #C9C9C9;
 }
 th {
     color: black;
@@ -25,7 +25,7 @@ th, td {
 }
 .tdiv {
   overflow-x: auto;
-  background-color: #C9C9C9;
+
 }
 .square {
   border: 1px solid #999;
