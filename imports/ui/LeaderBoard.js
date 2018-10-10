@@ -7,7 +7,7 @@ import AccountsUIWrapper from "./AccountsUIWrapper";
 import {Records} from '../api/records.js';
 import PropTypes from "prop-types";
 // App component - represents the whole app
-class LeaderBoard extends Component {
+export default class LeaderBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,14 +65,18 @@ class LeaderBoard extends Component {
   }
   render() {
     let dataAvaible = true;
-    let records = Meteor.call("records.getGanadores");
+    //let records = Meteor.call("records.getGanadores");
+    let records =this.props.records
+    console.log("en el LeaderBoard");
+    console.log(records);
+    console.log("en el LeaderBoard");
     if(records === undefined)
     {
       dataAvaible= false;
     }
     console.log(records);
     console.log("records find");
-    console.log(Records.find({}).fetch());
+    //console.log(Records.find({}).fetch());
     console.log("records find");
 
     let recordAvaible = (dataAvaible && records);
@@ -112,7 +116,7 @@ class LeaderBoard extends Component {
     );
   }
 }
-LeaderBoard.propTypes = {
+/*LeaderBoard.propTypes = {
   records:PropTypes.array.isRequired,
 };
 export default withTracker(() => {
@@ -120,3 +124,4 @@ export default withTracker(() => {
     records:Records.find({}).fetch(),
   };
 })(LeaderBoard);
+*/

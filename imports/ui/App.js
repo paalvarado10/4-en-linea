@@ -7,6 +7,7 @@ import AccountsUIWrapper from "./AccountsUIWrapper";
 import Block from './Block.js';
 import LeaderBoard from './LeaderBoard.js';
 import {Players} from '../api/players.js';
+import {Records} from '../api/records.js';
 import {Partidas} from '../api/partidas.js';
 import PropTypes from "prop-types";
 
@@ -148,6 +149,9 @@ renderPlayers()
   }
 
   render() {
+    console.log("EN EL APP");
+        console.log(this.props.records);
+        console.log("EN EL APP");
     return (
       <div>
 
@@ -164,7 +168,7 @@ renderPlayers()
 
         <div class = "App">
         <div className="container">
-        <LeaderBoard/>
+        <LeaderBoard records={this.props.records}/>
         </div>
 
           <div className="container">
@@ -190,6 +194,7 @@ renderPlayers()
 
 App.propTypes = {
   players:PropTypes.array.isRequired,
+  records:PropTypes.array.isRequired,
   user:PropTypes.object
 };
 
@@ -197,9 +202,11 @@ export default withTracker(() => {
 
   Meteor.subscribe("players");
   Meteor.subscribe("partidas");
+  Meteor.subscribe("records");
 
   return {
     players:Players.find({}).fetch(),
-    user:Meteor.user()
+    user:Meteor.user(),
+    records: Records.find({}).fetch()
   };
 })(App);
