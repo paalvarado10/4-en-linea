@@ -11,14 +11,17 @@ class LeaderBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      best:""
+      best:"",
+      rec:""
     };
+    this.renderList=this.renderList.bind(this);
   }
   renderList()
   {
     Meteor.call("records.getGanadores", (err, records)=>{
       if(records)
       {
+        this.setState({rec:records});
         console.log("Lista de records: "+records);
         let list = records.map((rec)=>{
           return(<tr><td>{rec.winner}</td><td>{rec.player1}</td><td>{rec.player2}</td></tr>)
@@ -38,6 +41,11 @@ class LeaderBoard extends Component {
   );
   }
   render() {
+    let r = this.state.rec;
+    if (r){
+      console.log(r);
+    }
+    console.log(this.props.records+" IMPRIMIENDO RECORDS DEL PROPS");
     return (
       <div>
       <h2>Lista de Partidas Jugadas</h2>
@@ -55,6 +63,6 @@ LeaderBoard.propTypes = {
 export default withTracker(() => {
   Meteor.subscribe("records");
   return {
-    players:Records.find({})
+    players:Records.find({}).fetch(),
   };
 })(LeaderBoard);
