@@ -16,18 +16,26 @@ class LeaderBoard extends Component {
   }
   renderList()
   {
-    let records = this.props.records;
-    console.log("Lista de records: "+records);
-    console.log("Lista de records v2: "+this.state.records);
-    let list = records.map((rec)=>{
-      return(<tr><td>{rec.winner}</td><td>{rec.player1}</td><td>{rec.player2}</td></tr>)
+    Meteor.call("records.getGanadores", (err, records)=>{
+      if(records)
+      {
+        console.log("Lista de records: "+records);
+        let list = records.map((rec)=>{
+          return(<tr><td>{rec.winner}</td><td>{rec.player1}</td><td>{rec.player2}</td></tr>)
+        });
+        return (
+          <table>
+          <tr><th>Ganador</th><th>Jugador 1</th><th>Jugador 2</th></tr>
+          {list}
+          </table>
+        );
+      }
     });
     return (
-      <table>
-      <tr><th>Ganador</th><th>Jugador 1</th><th>Jugador 2</th></tr>
-      {list}
-      </table>
-    );
+    <table>
+    <tr><th>Ganador</th><th>Jugador 1</th><th>Jugador 2</th></tr>
+    </table>
+  );
   }
   render() {
     return (
