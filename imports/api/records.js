@@ -19,15 +19,20 @@ Meteor.methods(
       player1:player1,
       player2:player2,
       winner:winner
-     });
-     if(!r)
-     {
-       Records.insert({
-        player1:player1,
-        player2:player2,
-        winner:winner
-      });
-     }
+    }, (r)=>{
+      if(r){
+        console.log("Ya lo guardo");
+      }
+      else
+      {
+        console.log("Lo esta Guardando");
+        Records.insert({
+         player1:player1,
+         player2:player2,
+         winner:winner
+       });
+      }
+    });
 	},
 	"records.getGanadores":function()
 	{
