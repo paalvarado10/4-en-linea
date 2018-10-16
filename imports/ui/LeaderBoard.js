@@ -6,7 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import AccountsUIWrapper from "./AccountsUIWrapper";
 import {Records} from '../api/records.js';
 import PropTypes from "prop-types";
-// App component - represents the whole app
+
 export default class LeaderBoard extends Component {
   constructor(props) {
     super(props);
@@ -16,23 +16,7 @@ export default class LeaderBoard extends Component {
     };
     this.renderList=this.renderList.bind(this);
   }
-/*  shouldComponentUpdate()
-  {
-    let records = this.state.rec;
-    if(records.length>=1)
-    {
-      Meteor.call("records.getGanadores", (err, records)=>{
-        if(records)
-        {
-          this.setState({rec:records});
-        }
-      });
-    }
-    else {
-    console.log("Ya hay lista de records en el should update");
-    this.render();
-    }
-  }*/
+
     renderList(list)
     {
       console.log(list);
@@ -86,7 +70,7 @@ export default class LeaderBoard extends Component {
   }
   render() {
     let dataAvaible = true;
-    //let records = Meteor.call("records.getGanadores");
+    
     let records =this.props.records
     console.log("en el LeaderBoard");
     console.log(records);
@@ -109,14 +93,4 @@ export default class LeaderBoard extends Component {
     );
   }
 }
-/*LeaderBoard.propTypes = {
-  records:PropTypes.array.isRequired,
-};
-export default withTracker(() => {
-  return {
-    records:Records.find({}).fetch(),
-  };
-})(LeaderBoard);
 
-lines to delete
-*/
