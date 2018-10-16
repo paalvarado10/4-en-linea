@@ -96,9 +96,8 @@ showPlayers()
   {
     return(<div>
                 <h1 class="izq"> Jugadores inscritos: </h1>
-                <p></p>
                 <br/>
-                <p></p>
+                
                 {
                   this.state.player==null?
 
@@ -111,9 +110,9 @@ showPlayers()
                 }
 
                 <br/>
-                <p></p>
+                
                 <br/>
-                <p></p>
+                
                 <ul>
                 {
                   this.hayPartida() ?
