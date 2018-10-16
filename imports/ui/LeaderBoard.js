@@ -109,6 +109,10 @@ export default class LeaderBoard extends Component {
     );
   }
 }
+
+LeaderBoard.propTypes = {
+  records:PropTypes.array.isRequired,
+};
 /*LeaderBoard.propTypes = {
   records:PropTypes.array.isRequired,
 };
