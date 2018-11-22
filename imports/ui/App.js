@@ -147,7 +147,8 @@ renderPlayers()
       return (<div><li><button class="izq" id={r.name} onClick={this.iniciarPartida.bind(this)} key={r.name}> {r.name} </button><br/><br/></li></div>);
     });
   }
-
+//Juan Camilo Useche: Deberian agregar una descripción de la aplicación y agunas intrucciones sobre como iniciar una partida y jugar.
+//Juan Camilo Useche: Deberian eliminar los espacios innecesarios, facilitaria la lectura del codigo.
   render() {
     console.log("EN EL APP");
         console.log(this.props.records);
