@@ -90,6 +90,9 @@ hayPartida()
 
 }
 
+//Juan Camilo Useche: No es claro a que se seleccionar un oponente
+//Juan Camilo Useche: De pronto habria sido mejor manejar salas como hicieron otros grupos
+  
 showPlayers()
 {
   if(Meteor.user())
